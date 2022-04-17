@@ -1,0 +1,150 @@
+body{
+  background: #2d3436;
+  margin-top: 10px;
+  padding-top: 5px;
+     
+}
+.cbHeader{
+-webkit-app-region: drag;
+height: 20px;
+position: fixed;
+top: 0px;
+width: calc(100% - 17px);
+background: #2d3436;
+z-index: 5;
+height: 25px;
+padding: 5px
+}
+.cbHeader button.simple{
+  -webkit-app-region: no-drag;
+border-radius: 25px;
+border: none;
+width: 20px;
+height: 20px;
+padding: 2px;
+font-size: 16px;
+
+margin-right: 7px
+}
+.cbTitle{
+  float: left;
+  margin-right: 7px
+}
+.cbHeadDatepick{
+  -webkit-app-region: no-drag;
+  float: left;
+}
+.cbHeader .minify{
+background-color: #f1c40f;
+float: right;
+}
+.cbHeader .close{
+  background-color: #c0392b;
+  float: right;
+  }
+  .cbHeader .close{
+    background-color: #81271d;
+    transition: 0.5s;
+    }
+.cbHeader .options{
+  background-color: transparent;
+  float: right;
+  color: #fff
+  }
+.cbHeader .minify:hover{
+  background-color: #a1830a;
+  transition: 0.5s;
+
+  }
+*{
+font-family: Tahoma 
+}
+.cbTitle{
+color: #fff;
+}
+#cbContainer{
+max-height: 100%;
+height: 100px;
+}
+.cbListItem{
+  list-style: none;
+  max-width: 100%;
+  padding: 5px;
+  margin: 15px 3px;
+}
+
+#cbList{
+  padding: 0;
+  overflow: auto;
+ 
+}
+body{
+  overflow: visible
+}
+li{
+  position: relative
+}
+.cbDate{
+  position:absolute;
+  right: -3px;
+  top: -23px;
+  padding: 0.9px;
+  font-size: 10px;
+  background: #689eb3;
+  width: 100%;
+  text-align: right;
+  max-width: 100%;
+  font-weight: 600
+}
+
+.deleteCbListItem{
+  position:absolute;
+  right: 1px;
+  bottom: 10px;
+  font-size: 10px; 
+}
+.cbTextarea{
+  z-index: -1;
+  width: 100%;
+  overflow: hidden;
+  color: #000;
+  outline: #636e72 2px solid;
+  border-radius: 0;
+}
+.cbListItem:hover .cbTextarea{
+outline:#d63031 2px solid;
+cursor: pointer;
+background-color: #0000006b
+}
+.cbListItem:hover::before{
+  content: 'Click to Paste';
+  position: absolute;
+  color: #fff;
+  left: calc(66% - 94px);
+  top: calc(50% - 19px);
+  transition: 1.5s;
+  cursor: pointer;
+}
+.cbListItem:hover{
+  cursor: default
+  }
+/* width */
+::-webkit-scrollbar {
+width:7px;
+
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+box-shadow: inset 0 0 5px #32282894;
+border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+
+background: white;
+border-radius: 10px;
+}
+textarea { resize: none; }
+

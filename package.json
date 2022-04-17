@@ -1,0 +1,52 @@
+{
+  "name": "copypasta",
+  "version": "1.0.2",
+  "description": "clipboard tool with history",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "rebuild": "npm rebuild --runtime=electron --target=16.0.5 --disturl=https://atom.io/download/atom-shell --abi=93"
+  },
+  "build": {
+    "appId": "copypasta",
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "publish": ["github"],
+      "icon": "tray.ico"
+    },
+    "nsis": {
+      "oneClick": true,
+      "installerIcon": "tray.ico",
+      "uninstallerIcon": "tray.ico",
+      "license": "license.md",
+      "allowToChangeInstallationDirectory": false
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DesignStraub/CopyPasta.git"
+  },
+  "author": "Marcello Straub",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DesignStraub/CopyPasta/issues"
+  },
+  "homepage": "https://github.com/DesignStraub/CopyPasta#readme",
+  "devDependencies": {
+    "electron": "^16.0.5",
+    "electron-builder": "^23.0.3",
+    "electron-rebuild": "^3.2.7"
+  },
+  "dependencies": {
+    "auto-launch": "^5.0.5",
+    "electron-clipboard-extended": "^1.1.1",
+    "electron-db": "^0.15.7",
+    "git": "^0.1.5",
+    "ionicons": "^6.0.1",
+    "jquery": "^3.6.0",
+    "robotjs": "^0.6.0"
+  }
+}

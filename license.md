@@ -1,0 +1,1 @@
+A little bit of Datenschutz in my Life, a Little bit of DSGVO is all I need.

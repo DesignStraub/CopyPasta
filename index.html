@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link href=".\Assets\dripicons\webfont\webfont.css" rel="stylesheet">
+    <link href="./styles.css" rel="stylesheet">
+  </head>
+  <body>
+
+    <div class="cbHeader">
+      <div class="cbTitle">CopyPasta</div>
+      <input type="date" class="datepicker cbHeadDatepick" id="cbDateFilter">
+      <button id="closeBtn" class="close simple"><div class="dripicons-cross"></div></button>
+      <button id="minifyBtn" class="minify simple"><div class="dripicons-minus"></div></button>
+      <button id="settingsBtn" class="options simple"><div class="dripicons-dots-3"></div></button>
+    </div>
+    <div id="cbContainer">
+      <ul id="cbList"></ul>
+    </div>
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="./renderer.js"></script>
+    <script src="./Assets/jquery.js"></script>
+    <script>if (window.module) module = window.module;</script>
+  </body>
+</html>
