@@ -5,4 +5,4 @@ Clipboard History Tool with additional functions.
 ### Usage:
 Use Ctrl+Shift+V to open Clipboard History.
 Click on any Entry, to write it in the next Input you focus.
-![image](https://user-images.githubusercontent.com/27856125/163804039-8b89ab86-5e22-4aea-be4f-a73161d69e1c.png)
+![image](https://user-images.githubusercontent.com/27856125/163804084-82f848bf-ff0a-449a-9647-e8580b2db668.png)
