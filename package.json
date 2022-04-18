@@ -1,6 +1,6 @@
 {
   "name": "copypasta",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "clipboard tool with history",
   "main": "main.js",
   "scripts": {
@@ -14,7 +14,9 @@
       "target": [
         "nsis"
       ],
-      "publish": ["github"],
+      "publish": [
+        "github"
+      ],
       "icon": "tray.ico"
     },
     "nsis": {
@@ -44,7 +46,6 @@
     "auto-launch": "^5.0.5",
     "electron-clipboard-extended": "^1.1.1",
     "electron-db": "^0.15.7",
-    "git": "^0.1.5",
     "ionicons": "^6.0.1",
     "jquery": "^3.6.0",
     "robotjs": "^0.6.0"

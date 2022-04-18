@@ -1,4 +1,9 @@
 const {app, BrowserWindow, globalShortcut, Tray, Menu, ipcMain, screen, nativeImage} = require('electron');
+// JSON CONFIG
+const fs = require('fs');
+const fileName = './CBconfig.json';
+const file = require(fileName);
+
 const path = require('path');
 const clipboard = require('electron-clipboard-extended');
 const robot = require('robotjs')
@@ -35,7 +40,11 @@ let oScreen = screen.getCursorScreenPoint();
     width: 800,
     height: 800,
     titleBarStyle: "hidden",
-    icon: __dirname + 'tray.ico',
+    icon: './tray.ico',    
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+      contextIsolation: true
+    },
     resizable: false
   });
   SettingsWindow.hide();
@@ -57,7 +66,7 @@ let oScreen = screen.getCursorScreenPoint();
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true
     },
-    icon: __dirname + 'tray.ico',
+    icon: './tray.ico',
     resizable: false
   })
   mainWindow.loadFile('index.html')
@@ -67,10 +76,34 @@ let oScreen = screen.getCursorScreenPoint();
     event.preventDefault();
     mainWindow.hide();
   });
+  //Tutorial Window
+  const tutorialWindow = new BrowserWindow({
+    width: 350,
+    height: 500,
+    titleBarStyle: "hidden",
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js'),
+      contextIsolation: true
+    },
+    icon: './tray.ico',
+    resizable: false
+  })
+  tutorialWindow.loadFile('tutorial.html');
+  tutorialWindow.hide();
+  if(file.showTut){
+    tutorialWindow.show();
+  }
+  ipcMain.on('hideTut', (event) => {
+    tutorialWindow.hide();
+    file.showTut = false;
+    fs.writeFile(fileName, JSON.stringify(file), function writeJSON(err) {});
+    event.returnValue = 'Main said I received your Sync message';
+  });
+
   ipcMain.on('showSettings', (event) => {
     bGotMinifyed = true;
     mainWindow.hide();
-    //SettingsWindow.show();
+    SettingsWindow.show();
     event.returnValue = 'Main said I received your Sync message';
   });
   ipcMain.on('closeWindow', (event) => {
@@ -81,13 +114,23 @@ let oScreen = screen.getCursorScreenPoint();
     mainWindow.hide();
     event.returnValue = 'Main said I received your Sync message';
   });
-  
-  ipcMain.on('filterCbMainlist', (event, args,filter) => {
-    console.log(filter);
-    db.getRows('cbLog', filter ,(succ, data) => {
+  ipcMain.on('hideSettings', (event) => {
+    SettingsWindow.hide();
+    event.returnValue = 'Main said I received your Sync message';
+  });
+  ipcMain.on('killAllEntrys', (event) => {
+    var aEntrys = [];
+    db.getAll('cbLog', (succ, data) => {aEntrys = data;})
+    aEntrys.forEach(function(oEntry){
+      db.deleteRow('cbLog', {'id': Number(oEntry.id)}, (succ, msg) => {});
+    })
+    mainWindow.webContents.send('renderCbList', {});
+    event.returnValue = 'DB is gone :)';
+  });
 
+  ipcMain.on('filterCbMainlist', (event, args,filter) => {
+    db.getRows('cbLog', filter ,(succ, data) => {
         mainWindow.webContents.send('renderCbList', data);
-  
     })
     event.returnValue = 'Main said I received your Sync message';
   });
@@ -103,6 +146,11 @@ let oScreen = screen.getCursorScreenPoint();
       }
     },
     {
+      label: 'Help', click: function () {
+        tutorialWindow.show();
+      }
+    },
+    {
       label: 'Quit', click: function () {
   
         app.quit();
@@ -112,14 +160,11 @@ let oScreen = screen.getCursorScreenPoint();
 
   const fnGetCbLogs = () => {
     var oData = db.getAll('cbLog', (succ, data) => {
-      if(data.length){
         mainWindow.webContents.send('renderCbList', data);
-      }
     })
   }
   fnGetCbLogs();
-  clipboard
-  .on('text-changed', () => {
+  clipboard.on('text-changed', () => {
       let sCurrentText = clipboard.readText(),
       sDate = new Date(),
       sDateNoTime = sDate.toLocaleString("sv-SE", {
@@ -158,18 +203,19 @@ let oScreen = screen.getCursorScreenPoint();
 ipcMain.on('writeCbItem', (event, id) => {
   bUpdateFromChange = false;
   db.getRows('cbLog', {'id': Number(id)}, (succ, data) => {
-    clipboard.writeText(data[0].text);
-    bUpdateFromChange = true;
-    bGotMinifyed = false;
-    mainWindow.hide();
-    
+    if(succ){
+      clipboard.writeText(data[0].text);
+      bUpdateFromChange = true;
+      bGotMinifyed = false;
+      mainWindow.hide();
+    }    
   });
 
 })
 mainWindow.on('blur', () => {
   if(mainWindow.isVisible() || bGotMinifyed){
   //wieder rein  wenn fertig mit design
-  mainWindow.hide();
+   mainWindow.hide();
   }else{
     setTimeout(() => {
       robot.keyTap('v', sContrlKey)

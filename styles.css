@@ -42,7 +42,7 @@ float: right;
   background-color: #c0392b;
   float: right;
   }
-  .cbHeader .close{
+  .cbHeader .close:hover{
     background-color: #81271d;
     transition: 0.5s;
     }
@@ -60,6 +60,7 @@ float: right;
 font-family: Tahoma 
 }
 .cbTitle{
+  font-weight: 600;
 color: #fff;
 }
 #cbContainer{
@@ -86,23 +87,20 @@ li{
 }
 .cbDate{
   position:absolute;
-  right: -3px;
+  right: -2px;
   top: -23px;
-  padding: 0.9px;
+  left: 3px;
+  overflow: hidden;
+  padding: 2px 0px;
   font-size: 10px;
   background: #689eb3;
   width: 100%;
-  text-align: right;
+  text-align: left;
   max-width: 100%;
   font-weight: 600
 }
 
-.deleteCbListItem{
-  position:absolute;
-  right: 1px;
-  bottom: 10px;
-  font-size: 10px; 
-}
+
 .cbTextarea{
   z-index: -1;
   width: 100%;
@@ -112,16 +110,16 @@ li{
   border-radius: 0;
 }
 .cbListItem:hover .cbTextarea{
-outline:#d63031 2px solid;
+outline:#c0392b 2px solid;
 cursor: pointer;
-background-color: #0000006b
+background-color: #00000047
 }
 .cbListItem:hover::before{
   content: 'Click to Paste';
   position: absolute;
   color: #fff;
   left: calc(66% - 94px);
-  top: calc(50% - 19px);
+  top: calc(55% - 19px);
   transition: 1.5s;
   cursor: pointer;
 }
@@ -148,3 +146,59 @@ border-radius: 10px;
 }
 textarea { resize: none; }
 
+
+
+/* Settings */
+.cbSettings{
+  margin-top: 30px; 
+  height: 100%;
+  padding: 25px;
+}
+label, p{
+  color: #fff
+}
+
+
+.cplogo{
+  max-width: 220px;
+  margin-left: 60px;
+  margin-top: 50px;
+  margin-bottom: 20px
+}
+
+.nrmlBtn{
+  margin: auto;
+  width: 100%;
+  border-radius: 20px;
+  border: none!important;
+  padding: 10px;
+  background-color: #689eb3
+}
+
+.nrmlBtn:hover{
+  background-color: #7bb3c7;
+  transition: 1.5
+}
+
+#gotItBtn{
+  margin-top: 20px
+}
+.cbTut{
+  padding: 5px
+}
+
+.deleteCbListItem{
+  z-index: 60;
+  background-color: #c0392b;
+  border: none;
+  font-size: 13px;
+  position: absolute;
+  top: 3px;
+  right: -3px;
+  bottom: 6px;
+  display: none;
+}
+
+.cbListItem:hover .deleteCbListItem{
+  display: block
+}

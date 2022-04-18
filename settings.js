@@ -1,10 +1,15 @@
-//EventRegestry Main
-var oKill =  document.getElementById('killAllEntrys;');
 
-oMiniFy.addEventListener('click', function (event) {
+var oKill =  document.getElementById('killAllEntrys'),
+oCloseSettings = document.getElementById('closeSettBtn');
+
+oKill.addEventListener('click', function (event) {
     var bConfirmed = window.confirm("Delete all Entrys?");
     if (bConfirmed) {
         ipcRenderer.sendSync("killAllEntrys", event);
     }
 });
-s
+
+
+oCloseSettings.addEventListener('click', function (event) {
+        ipcRenderer.sendSync("hideSettings", event);
+});
