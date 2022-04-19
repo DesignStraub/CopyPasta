@@ -90,7 +90,7 @@ let oScreen = screen.getCursorScreenPoint();
   })
   tutorialWindow.loadFile('tutorial.html');
   tutorialWindow.hide();
-  if(file.showTut){
+  if(file.showTut === true){
     tutorialWindow.show();
   }
   ipcMain.on('hideTut', (event) => {
@@ -152,8 +152,7 @@ let oScreen = screen.getCursorScreenPoint();
     },
     {
       label: 'Quit', click: function () {
-  
-        app.quit();
+        app.exit(0)
       }
     }
   ]));
@@ -215,7 +214,7 @@ ipcMain.on('writeCbItem', (event, id) => {
 mainWindow.on('blur', () => {
   if(mainWindow.isVisible() || bGotMinifyed){
   //wieder rein  wenn fertig mit design
-   mainWindow.hide();
+   //mainWindow.hide();
   }else{
     setTimeout(() => {
       robot.keyTap('v', sContrlKey)
@@ -229,9 +228,8 @@ app.whenReady().then(() => {
   })
 })
 app.on('window-all-closed', function () {
-  bGotMinifyed = true;
   clipboard.off('text-changed');
   clipboard.stopWatching();
   globalShortcut.unregisterAll();
-  if (process.platform !== 'darwin') app.quit()
+  if (process.platform !== 'darwin') app.exit(0)
 })
